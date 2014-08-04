@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Sudoku Solver";
+}
+@functions{
+    public string GetAntiForgeryToken()
+    {
+        string cookieToken, formToken;
+        AntiForgery.GetTokens(null, out cookieToken, out formToken);
+        return cookieToken + ":" + formToken;                
+    }
+}
+
+<header>
+    <h1>@ViewBag.Title</h1>
+</header>
+
+<div id="main-content">
+    <p class="error" data-bind="text: errorMessage"></p>
+    <input id="antiForgeryToken" type="hidden" value="@GetAntiForgeryToken()" />
+    <button data-bind="click: solve">Solve</button>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/sudoku")
+}
