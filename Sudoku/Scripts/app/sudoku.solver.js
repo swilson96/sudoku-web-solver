@@ -16,7 +16,7 @@ window.sudoku.solver = (function() {
                 model.errorMessage("Success: " + result);
             })
             .fail(function() {
-                model.errorMessage("Error asking the server to solve it.");
+                model.errorMessage("+++MELON MELON MELON+++");
             });
     }
 
