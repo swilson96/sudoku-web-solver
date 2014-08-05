@@ -17,6 +17,27 @@
 
 <div id="main-content">
     <p class="error" data-bind="text: errorMessage"></p>
+    <div class="grid">
+@for (var i = 0; i < 9; ++i)
+{
+    if (i%3 == 0 && i > 0)
+    {
+        <div class="row rowSpace"></div>
+    }
+        <div class="row">
+    @for (var j = 0; j < 9; ++j)
+    {
+        if (j%3 == 0 && j > 0)
+        {
+            <div class="span1 columnSpace"></div>
+        }
+            <div class="span1">
+                <input type="text" data-bind="value: sudoku()[@i]()[@j]" />
+            </div>
+    }
+        </div>
+}
+    </div>
     <input id="antiForgeryToken" type="hidden" value="@GetAntiForgeryToken()" />
     <button data-bind="click: solve">Solve</button>
 </div>
