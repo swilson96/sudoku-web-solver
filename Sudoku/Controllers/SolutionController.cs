@@ -13,7 +13,7 @@ namespace Sudoku.Controllers
     {
         // POST api/Solution
         [HttpPost]
-        public HttpResponseMessage Solution()
+        public HttpResponseMessage Solution(int?[][] grid)
         {
             if (!ModelState.IsValid)
             {

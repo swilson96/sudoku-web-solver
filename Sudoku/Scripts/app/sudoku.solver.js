@@ -10,7 +10,7 @@ window.sudoku.solver = (function() {
 
     function solve(model) {
         clearErrorMessage(model);
-        return ajaxRequest("post", "api/Solution", model.toGrid())
+        return ajaxRequest("post", "api/Solution", model.sudoku)
             .done(function(result) {
                 //NOP
                 model.errorMessage("Success: " + result);
@@ -28,7 +28,7 @@ window.sudoku.solver = (function() {
             contentType: "application/json",
             cache: false,
             type: type,
-            data: data ? data : null
+            data: data ? ko.toJSON(data) : null
         };
         var antiForgeryToken = $("#antiForgeryToken").val();
         if (antiForgeryToken) {

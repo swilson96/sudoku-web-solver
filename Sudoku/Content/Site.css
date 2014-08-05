@@ -26,8 +26,14 @@ button, input[type=submit] {
 }
 
 /*#region Grid */
+
 input {
     width: 32px;
+    text-align:center;
+}
+
+input.bold {
+    font-weight: bold;
 }
 
 .span1 {
@@ -41,6 +47,8 @@ input {
 .columnSpace {
     width: 8px
 }
+
+/*#endregion */
 
 /*#region Header */
 

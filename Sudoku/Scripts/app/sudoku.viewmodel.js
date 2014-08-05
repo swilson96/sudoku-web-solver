@@ -4,27 +4,16 @@
         error = ko.observable(),
         solve = function() {
             solver.solve(this);
-        },
-        toGrid = function() {
-            var grid = [];
-            sudoku().forEach(function(row) {
-                grid.push(row());
-            });
-            return grid;
         };
 
     for (var i = 0; i < 9 ; ++i) {
         sudoku()[i] = ko.observableArray();
-        for (var j = 0; j < 9; ++j) {
-            sudoku()[i]()[j] = null;
-        }
     }
 
     return {
         sudoku: sudoku,
         errorMessage: error,
-        solve: solve,
-        toGrid: toGrid
+        solve: solve
     };
 
 })(ko, window.sudoku.solver);

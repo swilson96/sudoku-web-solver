@@ -32,7 +32,7 @@
             <div class="span1 columnSpace"></div>
         }
             <div class="span1">
-                <input type="text" data-bind="value: sudoku()[@i]()[@j]" />
+                <input type="text" onkeydown="sudokuKeyFilter()" maxlength="1" data-bind="value: sudoku()[@i]()[@j]" />
             </div>
     }
         </div>
@@ -46,4 +46,19 @@
     @Scripts.Render("~/bundles/knockout")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/sudoku")
+    @Scripts.Render("~/Scripts/app/grid.js")
 }
+
+<script type="text/javascript">
+    function sudokuKeyFilter() {
+        if ((65 <= event.keyCode && event.keyCode <= 90)
+            || (106 <= event.keyCode && event.keyCode <= 111)
+            || (186 <= event.keyCode && event.keyCode <= 222)
+            || event.keyCode == 48
+            || event.keyCode == 96) {
+            //Prevent default action, which is inserting character
+            if (event.preventDefault) event.preventDefault(); //normal browsers
+            event.returnValue = false; //IE
+        }
+    }
+</script>
