@@ -205,6 +205,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Solve\UnableToSolveException.cs" />
+    <Compile Include="Solve\InvalidSudokuException.cs" />
+    <Compile Include="Solve\Solver.cs" />
+    <Compile Include="Solve\SolverWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -327,7 +331,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

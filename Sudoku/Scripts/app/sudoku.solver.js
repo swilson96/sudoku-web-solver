@@ -12,8 +12,9 @@ window.sudoku.solver = (function() {
         clearErrorMessage(model);
         return ajaxRequest("post", "api/Solution", model.sudoku)
             .done(function(result) {
-                //NOP
-                model.errorMessage("Success: " + result);
+                for (var i = 0; i < 9 ; ++i) {
+                    model.sudoku()[i](result[i]);
+                }
             })
             .fail(function() {
                 model.errorMessage("+++MELON MELON MELON+++");
