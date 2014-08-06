@@ -1,7 +1,7 @@
 sudoku-web-solver
 =================
 
-A website which solves sudoku.
+A website which solves sudoku. Currenty deployed at http://sudoku-6.apphb.com/
 
 The first (non-coursework) program I wrote many years ago was a sudoku solver, and I plan to convert it into a web-app and put it online, just for fun.
 
