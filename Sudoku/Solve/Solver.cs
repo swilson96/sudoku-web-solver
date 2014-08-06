@@ -19,11 +19,6 @@ namespace Sudoku
         bool Change;
         bool Contradiction;
 
-
-        public Solver()
-        {
-        }
-
         public int[,] Solve(int?[,] Boxes)
         {
             Restart = false;

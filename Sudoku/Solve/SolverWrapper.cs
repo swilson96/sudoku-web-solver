@@ -7,10 +7,9 @@ namespace Sudoku.Solve
 {
     public class SolverWrapper
     {
-        private Solver solver = new Solver();
-
         public int[][] Solve(int?[][] grid)
         {
+            var solver = new Solver();
             var input = ConvertJaggedNullableToTwoDimensionalNullable(grid);
 
             int[,] result = solver.Solve(input);

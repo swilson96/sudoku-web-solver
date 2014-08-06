@@ -16,6 +16,16 @@
         solve: function () {
             this.working(true);
             solver.solve(this);
+        },
+        setSolution: function (result) {
+            for (var i = 0; i < 9 ; ++i) {
+                this.sudoku()[i](result[i]);
+            }
+            this.working(false);
+        },
+        error: function (message) {
+            this.errorMessage(message);
+            this.working(false);
         }
     };
 

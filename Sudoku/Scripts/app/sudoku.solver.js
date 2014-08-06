@@ -12,13 +12,18 @@ window.sudoku.solver = (function() {
         clearErrorMessage(model);
         return ajaxRequest("post", "api/Solution", model.sudoku)
             .done(function(result) {
-                for (var i = 0; i < 9 ; ++i) {
-                    model.sudoku()[i](result[i]);
-                }
-                model.working(false);
+                model.setSolution(result);
             })
-            .fail(function() {
-                model.errorMessage("+++MELON MELON MELON+++");
+            .fail(function (err) {
+                if (err.status == 404) {
+                    model.error("Can't find the server, did you lose the internet?");
+                } else if (err.status == 400) {
+                    model.error("Are you sure that's a valid Sudoku?");
+                } else if (err.status == 501) {
+                    model.error("This one is too hard for me! Well done!");
+                } else {
+                    model.error("+++MELON MELON MELON+++");
+                }
             });
     }
 

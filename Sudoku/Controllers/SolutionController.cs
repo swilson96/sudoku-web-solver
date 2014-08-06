@@ -13,13 +13,12 @@ namespace Sudoku.Controllers
     [ValidateHttpAntiForgeryToken]
     public class SolutionController : ApiController
     {
-        private SolverWrapper solver = new SolverWrapper();
+        private readonly SolverWrapper solver = new SolverWrapper();
 
         // POST api/Solution
         [HttpPost]
         public int[][] Solution(int?[][] grid)
         {
-            // TODO: return sensible error if invalid sudoku, or if can't solve
             return solver.Solve(grid);
         }
     }
