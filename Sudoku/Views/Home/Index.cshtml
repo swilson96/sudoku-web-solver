@@ -36,14 +36,14 @@
             <div class="span1 columnSpace"></div>
         }
             <div class="span1">
-                <input type="text" onkeydown="sudokuKeyFilter()" maxlength="1" data-bind="value: sudoku()[@i]()[@j]" />
+                <input type="text" onkeydown="sudokuKeyFilter()" maxlength="1" data-bind="value: sudoku()[@i]()[@j], disable: working" />
             </div>
     }
         </div>
 }
     </div>
     <input id="antiForgeryToken" type="hidden" value="@GetAntiForgeryToken()" />
-    <button data-bind="click: solve, disabled: working">Solve</button>
+    <button data-bind="click: solve, disable: working">Solve</button>
 </div>
 
 @section scripts {
