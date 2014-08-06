@@ -15,6 +15,7 @@ window.sudoku.solver = (function() {
                 for (var i = 0; i < 9 ; ++i) {
                     model.sudoku()[i](result[i]);
                 }
+                model.working(false);
             })
             .fail(function() {
                 model.errorMessage("+++MELON MELON MELON+++");

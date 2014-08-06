@@ -39,7 +39,7 @@
 }
     </div>
     <input id="antiForgeryToken" type="hidden" value="@GetAntiForgeryToken()" />
-    <button data-bind="click: solve">Solve</button>
+    <button data-bind="click: solve, disabled: working">Solve</button>
 </div>
 
 @section scripts {
