@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 
 namespace Sudoku.Solve
@@ -20,9 +21,9 @@ namespace Sudoku.Solve
         private static int?[,] ConvertJaggedNullableToTwoDimensionalNullable(int?[][] original)
         {
             int?[,] result = new int?[9, 9];
-            for (int i = 0; i < 9; i++)
+            for (int i = 0; i < Math.Min(9, original.Length); i++)
             {
-                for (int j = 0; j < 9; j++)
+                for (int j = 0; j < Math.Min(9, original[i].Length); j++)
                 {
                     result[i, j] = original[i][j];
                 }
