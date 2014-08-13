@@ -99,6 +99,7 @@
   <ItemGroup>
     <Compile Include="Controllers\SolutionControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Solve\SolverTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />

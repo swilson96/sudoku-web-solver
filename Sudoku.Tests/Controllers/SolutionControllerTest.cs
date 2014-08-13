@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Data;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Sudoku.Controllers;
@@ -83,12 +80,38 @@ namespace Sudoku.Tests.Controllers
 
         [TestMethod]
         [ExpectedException(typeof (InvalidSudokuException))]
-        public void PostInValidSudoku()
+        public void PostInValidSudokuWithConflict()
         {
             // From http://www.sudoku.ws/hard-1.htm
             var inValidSudoku = new int?[][]
             {
                 new int?[] {null, 2, 2}
+            };
+
+            controller.Solution(inValidSudoku);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidSudokuException))]
+        public void PostInValidSudokuWithEntryTooLarge()
+        {
+            // From http://www.sudoku.ws/hard-1.htm
+            var inValidSudoku = new int?[][]
+            {
+                new int?[] {null, 2, 15}
+            };
+
+            controller.Solution(inValidSudoku);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidSudokuException))]
+        public void PostInValidSudokuWithEntryNegative()
+        {
+            // From http://www.sudoku.ws/hard-1.htm
+            var inValidSudoku = new int?[][]
+            {
+                new int?[] {null, 2, -9}
             };
 
             controller.Solution(inValidSudoku);
