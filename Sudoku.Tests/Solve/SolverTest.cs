@@ -1,20 +1,20 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Sudoku.Tests.Solve
 {
-    [TestClass]
+    [TestFixture]
     public class SolverTest
     {
         private Solver solver;
 
-        [TestInitialize]
+        [TestFixtureSetUp]
         public void setup()
         {
             solver = new Solver();
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(InvalidSudokuException))]
         public void HardButInvalidSudokuThrows()
         {

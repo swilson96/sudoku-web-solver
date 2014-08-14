@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Web.Http;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Sudoku.Controllers;
 
 namespace Sudoku.Tests.Controllers
 {
-    [TestClass]
+    [TestFixture]
     public class SolutionControllerTest : ApiController
     {
         private readonly SolutionController controller = new SolutionController();
 
-        [TestMethod]
+        [Test]
         public void PostValidSudokuToSolve()
         {
             // From http://www.sudoku.ws/hard-1.htm
@@ -54,7 +54,7 @@ namespace Sudoku.Tests.Controllers
             }
         }
 
-        [TestMethod]
+        [Test]
         public void PostBlankSudokuToSolve()
         {
             var emptySudoku = new int?[][]
@@ -78,7 +78,7 @@ namespace Sudoku.Tests.Controllers
             }, result);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof (InvalidSudokuException))]
         public void PostInValidSudokuWithConflict()
         {
@@ -91,7 +91,7 @@ namespace Sudoku.Tests.Controllers
             controller.Solution(inValidSudoku);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(InvalidSudokuException))]
         public void PostInValidSudokuWithEntryTooLarge()
         {
@@ -104,7 +104,7 @@ namespace Sudoku.Tests.Controllers
             controller.Solution(inValidSudoku);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(InvalidSudokuException))]
         public void PostInValidSudokuWithEntryNegative()
         {
