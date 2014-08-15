@@ -19,6 +19,8 @@ window.sudoku.solver = (function() {
                     model.error("Can't find the server, did you lose the internet?");
                 } else if (err.status == 400) {
                     model.error("Are you sure that's a valid Sudoku?");
+                } else if (err.status == 409) {
+                    model.error("No solution exists for that one.");
                 } else if (err.status == 501) {
                     model.error("This one is too hard for me! Well done!");
                 } else {

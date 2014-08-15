@@ -5,7 +5,7 @@ using System.Net;
 using System.Web;
 using System.Web.Http;
 
-namespace Sudoku
+namespace Sudoku.Solve
 {
     public class InvalidSudokuException : HttpResponseException
     {

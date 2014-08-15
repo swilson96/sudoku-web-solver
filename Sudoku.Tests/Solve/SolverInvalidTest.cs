@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using Sudoku.Solve;
 
 namespace Sudoku.Tests.Solve
 {
@@ -15,7 +16,7 @@ namespace Sudoku.Tests.Solve
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidSudokuException))]
+        [ExpectedException(typeof(NoSolutionExistsException))]
         public void HardButInvalidSudokuThrows()
         {
             solver.Solve(new int?[,]

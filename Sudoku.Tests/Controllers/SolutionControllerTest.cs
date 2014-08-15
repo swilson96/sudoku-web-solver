@@ -2,6 +2,7 @@
 using System.Web.Http;
 using NUnit.Framework;
 using Sudoku.Controllers;
+using Sudoku.Solve;
 
 namespace Sudoku.Tests.Controllers
 {

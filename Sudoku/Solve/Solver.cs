@@ -1,27 +1,21 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 
-namespace Sudoku
+namespace Sudoku.Solve
 {
     /// <summary>
-    /// Don't judge my by this ancient code. I deliberately haven't tidied it up.
+    /// Don't judge my by this ancient code. I deliberately haven't tidied it up much.
     /// </summary>
     public class Solver
     {
+        // Global vars, yuck
         int[, ] SudokuGrid = new int[9, 9];
         int[, , ] Possibilities = new int[9, 9, 9];
-        bool Restart;
         bool Exit = false;
         bool Change;
         bool Contradiction;
 
         public int[,] Solve(int?[,] Boxes)
         {
-            Restart = false;
             int i, j;
             for (i = 0; i < 9; i++)
             {
@@ -37,10 +31,8 @@ namespace Sudoku
                     }
                 }
             }
-            //if (Restart != true)
-            //{
-                return FindSolution();
-            //}
+
+            return FindSolution();
         }
 
         private int[,] FindSolution()
@@ -56,9 +48,9 @@ namespace Sudoku
                     {
                         Possibilities[i, j, k] = 1;
                     }
-            while (!Finished())          /* the actual program: alternate between */
+            while (!Finished())        /* the actual program: alternate between */
             {         
-                Basic();                     /* basic techniques...  */
+                Basic();               /* basic techniques...  */
                 if (Exit)
                     break;
                 if (!Change)
@@ -248,23 +240,19 @@ namespace Sudoku
                 UpdateGrid2();
                 if(!IsValid() || Contradiction) 
                 {
-                    //Display();
-                    //outposs();
-                    //label2.Text = "I screwed it up!";
-                    Exit = true;
-                    return;
+                    // We might have screwed it up, but assume there is an inherent contradiction
+                    throw new NoSolutionExistsException();
                 }
-                pass++;
+                ++pass;
             } /* end while loop */
-            //printf("\nAfter %d basic passes we have:",pass);
-            // ??? Display();
+            
             if (!Change)
             {
                 //label2.Text = "Basic passes exhausted.";
             }
         }
 
-        private bool MakeGuess()  /* when other methods fail, makes a conjecture */
+        private bool MakeGuess() /* when other methods fail, makes a conjecture */
         {  
             int n,i,j,k;         /* and seeks a contradiction/solution          */
             int row,col;
@@ -403,8 +391,6 @@ namespace Sudoku
                     else
                     {
                         Reduce();
-                        //Basic();
-                        //Reduce();
                         col++;
                         n = 1;
                     }
@@ -412,7 +398,7 @@ namespace Sudoku
                 row++;
                 col = 0;
             }
-            // FINISHED Display();
+            // FINISHED
             //label2.Text = "Solved it!";
         }
 

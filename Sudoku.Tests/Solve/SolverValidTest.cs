@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using Sudoku.Solve;
 
 namespace Sudoku.Tests.Solve
 {

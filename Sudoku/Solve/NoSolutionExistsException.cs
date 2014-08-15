@@ -7,9 +7,9 @@ using System.Web.Http;
 
 namespace Sudoku.Solve
 {
-    public class UnableToSolveException : HttpResponseException
+    public class NoSolutionExistsException : HttpResponseException
     {
-        public UnableToSolveException() : base(HttpStatusCode.NotImplemented)
+        public NoSolutionExistsException() : base(HttpStatusCode.Conflict)
         {
         }
     }

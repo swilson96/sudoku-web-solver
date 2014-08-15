@@ -102,7 +102,8 @@
   <ItemGroup>
     <Compile Include="Controllers\SolutionControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Solve\SolverTest.cs" />
+    <Compile Include="Solve\SolverInvalidTest.cs" />
+    <Compile Include="Solve\SolverValidTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
