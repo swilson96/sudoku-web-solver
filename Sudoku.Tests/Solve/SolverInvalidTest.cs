@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Sudoku.Tests.Solve
 {
     [TestFixture]
-    public class SolverTest
+    public class SolverInvalidTest
     {
         private Solver solver;
 

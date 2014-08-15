@@ -49,7 +49,7 @@ namespace Sudoku.Tests.Controllers
             {
                 for (int j = 0; j < 9; j++)
                 {
-                    Assert.AreEqual(expected[i][j], actual[i][j], String.Format("Entry [{0},{1}] is incorrect", i, j));
+                    Assert.AreEqual(expected[i][j], actual[i][j], String.Format("Entry [{0},{1}] is unexpected", i, j));
                 }
             }
         }

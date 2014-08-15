@@ -25,6 +25,10 @@ namespace Sudoku.Solve
             {
                 for (int j = 0; j < Math.Min(9, original[i].Length); j++)
                 {
+                    if (original[i][j] < 1 || original[i][j] > 9)
+                    {
+                        throw new InvalidSudokuException();
+                    }
                     result[i, j] = original[i][j];
                 }
             }
