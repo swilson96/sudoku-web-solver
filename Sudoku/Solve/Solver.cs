@@ -4,6 +4,8 @@ namespace Sudoku.Solve
 {
     /// <summary>
     /// Don't judge my by this ancient code. I deliberately haven't tidied it up much.
+    ///
+    /// Originally written in C
     /// </summary>
     public class Solver
     {
