@@ -9,6 +9,8 @@ It was originally in C, then shortly afterwards converted to a C# desktop app. T
 
 Update 2023: that worked for a while, although deploying .net on heroku or other free providers was tricky and I didn't really get it working reliably. I'm now converting to a static react SPA to deply on github pages. 
 
+Note it will run locally at http://localhost:3000/sudoku-web-solver
+
 Here's the generated Next.js readme stuff:
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
@@ -27,7 +29,7 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000/sudoku-web-solver](http://localhost:3000/sudoku-web-solver) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
