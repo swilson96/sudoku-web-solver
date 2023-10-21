@@ -1,6 +1,6 @@
 1:HL["/sudoku-web-solver/_next/static/media/c9a5bc6a7c948fb0-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-2:HL["/sudoku-web-solver/_next/static/css/11b65d41037e0214.css","style",{"crossOrigin":""}]
-0:["8l_pmQdsFfuIWQik4If7t",[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",true],"$L3",[[["$","link","0",{"rel":"stylesheet","href":"/sudoku-web-solver/_next/static/css/11b65d41037e0214.css","precedence":"next","crossOrigin":""}]],"$L4"]]]]
+2:HL["/sudoku-web-solver/_next/static/css/02decab322360032.css","style",{"crossOrigin":""}]
+0:["kHiC68ye0vE6R2eqe9Nz1",[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",true],"$L3",[[["$","link","0",{"rel":"stylesheet","href":"/sudoku-web-solver/_next/static/css/02decab322360032.css","precedence":"next","crossOrigin":""}]],"$L4"]]]]
 5:I[6954,[],""]
 6:I[7264,[],""]
 8:I[413,["413","static/chunks/413-61142c92625e55d0.js","931","static/chunks/app/page-27bff51f59619a70.js"],"Image"]
