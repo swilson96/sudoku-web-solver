@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Solver from './components/solver'
 
 export default function Home() {

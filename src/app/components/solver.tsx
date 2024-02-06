@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from 'react';
-import Grid, { GridValue } from './grid'
+import { GridValue } from '../types';
+import Grid from './grid'
 
 const initialState: GridValue = new Array();
 for (let i = 0; i < 9; ++i) {

@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
-
-export type CellValue = number | null;
+import { CellValue } from "../types";
 
 type CellProps = { 
     rowIndex: number;

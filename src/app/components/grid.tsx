@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
-import Cell, { CellValue } from './cell';
-
-export type GridValue = CellValue[][];
+import { CellValue, GridValue } from '../types';
+import Cell from './cell';
 
 type GridProps = {
     value: GridValue;
