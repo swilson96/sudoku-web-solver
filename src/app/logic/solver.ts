@@ -1,13 +1,32 @@
 import { GridValue } from "../types";
 
-export default class Solve {
-    private sudokuGrid: number[][] = new Array(9);
-    private possibilities: number[][][]  = new Array(9);
+const initialiseArray = (length: number, width: number, depth?: number) => {
+    const ret = new Array(length);
+    for (let i = 0; i < length; ++i) {
+        ret[i] = new Array(width);
+        if (depth) {
+            for (let j = 0; j < width; ++j) {
+                ret[i][j] = new Array(depth);
+            }
+        }
+    }
+    return ret;
+};
+
+export default class Solver {
+    private sudokuGrid: number[][] = initialiseArray(9, 9);
+    private possibilities: number[][][]  = initialiseArray(9, 9, 9);
     private exit: boolean = false;
     private change: boolean = false;
     private contradiction: boolean = false;
+    
+    private log: (message: string) => void;
 
-    public solve(input: GridValue) {
+    public constructor(log?: (message: string) => void) {
+        this.log = log || console.log;
+    }
+
+    public solve(input: GridValue): GridValue {
         for (let i = 0; i < 9; i++)
         {
             for (let j = 0; j < 9; j++)
@@ -15,12 +34,12 @@ export default class Solve {
                 this.sudokuGrid[i][j] = input[i][j] || 0;
             }
         }
-        return this.findSolution();
+        return this.findSolution(); // shouldn't have to convert zeros to nulls
     }
 
     private findSolution()
     {
-        if (!this.isValid())
+        if (!this.isValid(this.sudokuGrid))
         {
             throw new Error("Invalid Sudoku");
         }
@@ -52,7 +71,7 @@ export default class Solve {
         return this.sudokuGrid;
     }
 
-    private isValid()  /* checks the current grid is valid */
+    public isValid(input: number[][])  /* checks the current grid is valid */
     {     
         let list1:number[] = new Array(10);
         let list2:number[] = new Array(10);
@@ -67,19 +86,19 @@ export default class Solve {
             }
             for(let j=0 ; j<9 ; j++) 
             {   /* j are the 9 elements of i */
-                list1[this.sudokuGrid[i][j]]++;                           /* rows */
-                if(list1[this.sudokuGrid[i][j]]>1 && this.sudokuGrid[i][j]>0)
+                list1[input[i][j]]++;                           /* rows */
+                if(list1[input[i][j]]>1 && input[i][j]>0)
                     return false;
-                list2[this.sudokuGrid[j][i]]++;                           /* columns */
-                if(list2[this.sudokuGrid[j][i]]>1 && this.sudokuGrid[j][i]>0)
+                list2[input[j][i]]++;                           /* columns */
+                if(list2[input[j][i]]>1 && input[j][i]>0)
                     return false;
-                list3[ this.sudokuGrid[(i/3)*3 + j%3][(i*3)%9 + j/3] ]++; /* boxes */
-                if(list3[ this.sudokuGrid[(i/3)*3 + j%3][(i*3)%9 + j/3] ] > 1 
-                    && this.sudokuGrid[(i/3)*3 + j%3][(i*3)%9 + j/3] > 0)
+                list3[ input[Math.floor(i/3)*3 + j%3][(i*3)%9 + Math.floor(j/3)] ]++; /* boxes */
+                if(list3[ input[Math.floor(i/3)*3 + j%3][(i*3)%9 + Math.floor(j/3)] ] > 1 
+                    && input[Math.floor(i/3)*3 + j%3][(i*3)%9 + Math.floor(j/3)] > 0)
                     return false;
             }
         }
-    return true;
+        return true;
     }
 
     private updateGrid() /* puts in a number if it is the only possibility */
@@ -102,7 +121,7 @@ export default class Solve {
                             }
                     if (sum < 1)
                     {
-                        //printf("\nUpdate error: no possibilities found for [%d, %d]\n", i, j);
+                        this.log(`Update error: no possibilities found for [${i}, ${j}]`);
                         this.contradiction = true;
                         return;
                     }
@@ -123,7 +142,7 @@ export default class Solve {
                 {    /* j an element of i */
                     sum[0] += this.possibilities[i][j][n - 1];
                     sum[1] += this.possibilities[j][i][n - 1];
-                    sum[2] += this.possibilities[(i / 3) * 3 + j % 3][(i * 3) % 9 + j / 3][n - 1];
+                    sum[2] += this.possibilities[Math.floor(i / 3) * 3 + j % 3][(i * 3) % 9 + Math.floor(j/3)][n - 1];
                 }
                 if (sum[0] == 1)
                     for (let j = 0; j < 9; j++)
@@ -136,7 +155,7 @@ export default class Solve {
                         }
                 if (sum[0] < 1)
                 {
-                    //printf("\nUpdate2 error: nowhere to put %d in column %d\n", n, i);
+                    this.log(`Update2 error: nowhere to put ${n} in column ${i}`);
                     this.contradiction = true;
                     return;
                 }
@@ -150,22 +169,22 @@ export default class Solve {
                         }
                 if (sum[1] < 1)
                 {
-                    //printf("\nUpdate2 error: nowhere to put %d in row %d\n", n, i);
+                    this.log(`Update2 error: nowhere to put ${n} in row ${i}`);
                     this.contradiction = true;
                     return;
                 }
                 if (sum[2] == 1)
                     for (let j = 0; j < 9; j++)
-                        if (this.possibilities[(i / 3) * 3 + j % 3][(i * 3) % 9 + j / 3][n - 1] == 1)
+                        if (this.possibilities[Math.floor(i / 3) * 3 + j % 3][(i * 3) % 9 + Math.floor(j/3)][n - 1] == 1)
                         {
-                            if (this.sudokuGrid[(i / 3) * 3 + j % 3][(i * 3) % 9 + j / 3] == 0)
+                            if (this.sudokuGrid[Math.floor(i / 3) * 3 + j % 3][(i * 3) % 9 + Math.floor(j/3)] == 0)
                                 this.change = true;
-                            this.sudokuGrid[(i / 3) * 3 + j % 3][(i * 3) % 9 + j / 3] = n;
+                            this.sudokuGrid[Math.floor(i / 3) * 3 + j % 3][(i * 3) % 9 + Math.floor(j/3)] = n;
                             break;
                         }
                 if (sum[2] < 1)
                 {
-                    //printf("\nUpdate2 error: nowhere to put %d in box %d\n", n, i);
+                    this.log(`Update2 error: nowhere to put ${n} in box ${i}`);
                     this.contradiction = true;
                     return;
                 }
@@ -188,7 +207,7 @@ export default class Solve {
                     for (let k = 0; k < 3; k++)
                         for (let l = 0; l < 3; l++)
                             /* box coordinate i/3,j/3; top left of box is (i/3)*3,(j/3)*3 */
-                            this.possibilities[(i / 3) * 3 + k][(j / 3) * 3 + l][this.sudokuGrid[i][j] - 1] = 0;
+                            this.possibilities[Math.floor(i / 3) * 3 + k][Math.floor(j/3) * 3 + l][this.sudokuGrid[i][j] - 1] = 0;
                     this.possibilities[i][j][this.sudokuGrid[i][j] - 1] = 1;
                 }
     }
@@ -199,7 +218,7 @@ export default class Solve {
             for (let j = 0; j < 9; j++)
                 if (this.sudokuGrid[i][j] == 0)
                     return false;
-        //label2.Text = "Solved it!";
+        this.log("Solved it! (Whole grid is complete)");
         return true;
     }
 
@@ -214,7 +233,7 @@ export default class Solve {
             this.change = false;
             this.updateGrid();
             this.updateGrid2();
-            if(!this.isValid() || this.contradiction) 
+            if(!this.isValid(this.sudokuGrid) || this.contradiction) 
             {
                 // We might have screwed it up, but assume there is an inherent contradiction
                 throw new Error("No solution exists");
@@ -224,7 +243,7 @@ export default class Solve {
         
         if (!this.change)
         {
-            //label2.Text = "Basic passes exhausted.";
+            this.log(`Basic passes exhausted after ${pass} passes.`);
         }
     }
 
@@ -232,8 +251,8 @@ export default class Solve {
     {  
         let end = false;
         let pass = 1, maxpass = 100;
-        let storeGrid = new Array(9);
-        let storePoss = new Array(9);
+        let storeGrid = initialiseArray(9, 9);
+        let storePoss = initialiseArray(9, 9, 9);
         //label2.Text = "\nBeginning this.makeGuess() function.";
         for (let row = 0; row < 9; row++)
         {
@@ -245,7 +264,7 @@ export default class Solve {
                     {
                         if (this.possibilities[row][col][n - 1] == 1)
                         {
-                            //printf("\nConjecturing that [%d, %d] contains %d...",row,col,n);
+                            this.log(`Conjecturing that [${row}, ${col}] contains ${n}...`);
                             for (let i = 0; i < 9; i++) /* fill in the storage arrays */
                                 for (let j = 0; j < 9; j++)
                                 {
@@ -264,20 +283,20 @@ export default class Solve {
                                     this.updateGrid2();
                                 if (this.finished())
                                 {
-                                    //printf("done, leading to the solution:");
+                                    this.log("done, leading to the solution");
                                     // FINISHED Display();
                                     return true;
                                 }
-                                if (!this.isValid() || this.contradiction)
+                                if (!this.isValid(this.sudokuGrid) || this.contradiction)
                                 {
                                     storePoss[row][col][n - 1] = 0;
                                     end = true;
-                                    //printf("done, ruled it out.");
+                                    this.log("done, ruled it out.");
                                     break;
                                 }
                                 if (!this.change)
                                 {
-                                    //printf("done, got stuck.");
+                                    this.log("done, got stuck.");
                                     break;
                                 }
                                 pass++;
@@ -303,9 +322,9 @@ export default class Solve {
 
     private guess2() /* desperate now - try the long way */
     {
-        //const store: number[][] = new Array(9);
-        const storePoss: number[][][] = new Array(9);
-        //label2.Text = "Beginning guess2 function.";
+        //const store: number[][] = initialiseArray(9, 9);
+        const storePoss: number[][][] = initialiseArray(9, 9, 9);
+        this.log("Beginning an exhaustive backtracking search.");
         for (let i = 0; i < 9; i++) /* fill in the storage arrays */
         {
             for (let j = 0; j < 9; j++)
@@ -337,7 +356,7 @@ export default class Solve {
                 if (n >= 10) //Occurs only if we didn't find anything
                 {
                     //Backtrack here
-                    if (col == 0)
+                    if (col === 0)
                     {
                         row--;
                         col = 8;
@@ -371,6 +390,6 @@ export default class Solve {
             col = 0;
         }
         // FINISHED
-        //label2.Text = "Solved it!";
+        this.log("Finished.");
     }
 }

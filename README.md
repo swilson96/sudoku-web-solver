@@ -3,13 +3,15 @@ sudoku-web-solver
 
 A website which solves sudoku. Currenty deployed at www.swilson.co.uk/sudoku
 
-The first (non-coursework) program I wrote many years ago was a sudoku solver, and I plan to convert it into a web-app and put it online, just for fun.
+The first (non-coursework) program I wrote many years ago was a sudoku solver, and I've converted it into a web-app and put it online, just for fun.
 
-It was originally in C, then shortly afterwards converted to a C# desktop app. This project is to incorporate it in a C# MVC.NET website. I don't plan to refactor the code, just expose it on the web.
-
-Update 2023: that worked for a while, although deploying .net on heroku or other free providers was tricky and I didn't really get it working reliably. I'm now converting to a static react SPA to deply on github pages. 
+It was originally in C, then shortly afterwards converted to a C# desktop app. This project is to incorporate it in a C# MVC.NET website. That worked for a while, although deploying .net on heroku or other free providers was tricky and I didn't really get it working reliably. I've now converted it to a static react SPA to deply on github pages. At each stage I haven't bothered to improve or update the code, I've just done the minimum to port it to the new language/framework. Oddly, it has improved a bit as a result.
 
 Note it will run locally at http://localhost:3000/sudoku-web-solver
+
+The interesting sudoku bit (also the oldest bit I first wrote as a student) is [src/app/logic/solver.ts](src/app/logic/solver.ts)
+
+---
 
 Here's the generated Next.js readme stuff:
 

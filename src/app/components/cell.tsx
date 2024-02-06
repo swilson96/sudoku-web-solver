@@ -1,18 +1,18 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { CellValue } from "../types";
 
 type CellProps = { 
     rowIndex: number;
     colIndex: number;
     value: CellValue;
-    setValue: (v: CellValue) => void 
+    setValue: (v: CellValue) => void;
+    touched: boolean;
+    setTouched: (b: boolean) => void;
 };
 
-export default function Cell({ rowIndex, colIndex, value, setValue }: CellProps) {
-    const [edited, setEdited] = useState(false);
-
+export default function Cell({ rowIndex, colIndex, value, setValue, touched, setTouched }: CellProps) {
     const classes = useMemo(() => {
-        let c = "p-3";
+        let c = "p-3 h-15 w-15";
         if (colIndex === 2 || colIndex === 5) {
             c += " border-r-2";
         }
@@ -25,14 +25,14 @@ export default function Cell({ rowIndex, colIndex, value, setValue }: CellProps)
     const onChange = useMemo(() => (e: React.FormEvent<HTMLInputElement>) => {
         if (!e.currentTarget.value || e.currentTarget.value == "") {
             setValue(null);
-            setEdited(false);
+            setTouched(false);
         } else {
             setValue(Number(e.currentTarget.value));
-            setEdited(true);
+            setTouched(true);
         }
-    }, [setValue]);
+    }, [setValue, setTouched]);
 
-    const inputClasses = "mh-12 mw-12 p-3 " + (edited ? "bg-gray-600" : "bg-gray-800");
+    const inputClasses = "h-12 w-12 p-3 " + (touched ? "bg-gray-600" : "bg-gray-800");
     
     return (
         <div className={classes}>
