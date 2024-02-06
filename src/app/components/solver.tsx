@@ -24,7 +24,6 @@ export default function Solver() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         setError("");
-        console.log("solve it");
         try {
             const solver = new SudokuSolver();
             const solution = solver.solve(gridState);
@@ -46,7 +45,7 @@ export default function Solver() {
     return (
         <form onSubmit={handleSubmit}>
             {!!error && <p className="p-3 text-red-600">{error}</p>}
-            {!error && <p className="p-3">Enter what you know and click &quot;solve&quot;</p>}
+            {!error && <p className="p-3">Enter what you know and click &quot;Solve&quot;</p>}
             <Grid value={gridState} setValue={setGridState} touched={touchedState} setTouched={setTouchedState} />
             <button type="submit" className="mx-3 mt-12 px-8 py-4 bg-gray-700 hover:bg-gray-600">Solve</button>
             <button type="button" onClick={clearUntouched} className="mx-3 mt-12 px-8 py-4 bg-gray-800 hover:bg-gray-600">Clear solution</button>
