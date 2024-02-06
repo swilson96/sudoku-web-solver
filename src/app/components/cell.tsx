@@ -37,7 +37,7 @@ export default function Cell({ rowIndex, colIndex, value, setValue }: CellProps)
     
     return (
         <div className={classes}>
-            <input value={value || ""} onChange={onChange} className={inputClasses} type="number" min={1} max={9} />
+            <input value={value || ""} onChange={onChange} className={inputClasses} type="number" min="1" max="9"  />
         </div>
     );
 }

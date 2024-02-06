@@ -1,9 +1,11 @@
 import { useMemo } from 'react';
 import Cell, { CellValue } from './cell';
 
+export type GridValue = CellValue[][];
+
 type GridProps = {
-    value: CellValue[][];
-    setValue: (v: CellValue[][]) => void;
+    value: GridValue;
+    setValue: (v: GridValue) => void;
 };
 
 export default function Grid({ value, setValue }: GridProps) {

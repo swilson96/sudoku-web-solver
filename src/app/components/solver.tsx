@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from 'react';
-import { CellValue } from './cell';
-import Grid from './grid'
+import React, { useState } from 'react';
+import Grid, { GridValue } from './grid'
 
-const initialState: CellValue[][] = new Array();
+const initialState: GridValue = new Array();
 for (let i = 0; i < 9; ++i) {
     initialState[i] = new Array();
     for (let j = 0; j < 9; ++j) {
@@ -13,14 +12,17 @@ for (let i = 0; i < 9; ++i) {
 }
 
 export default function Solver() {
-    const [gridState, setGridState] = useState<CellValue[][]>(initialState);
+    const [gridState, setGridState] = useState<GridValue>(initialState);
 
-    const solve = () => console.log("solve it");
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        console.log("solve it");
+    }
 
     return (
-        <div>
+        <form onSubmit={handleSubmit}>
             <Grid value={gridState} setValue={setGridState}/>
-            <button type="button" onClick={solve} className="mx-3 mt-12 px-8 py-4 bg-gray-800 hover:bg-white-900">Solve</button>
-        </div>
+            <button type="submit" className="mx-3 mt-12 px-8 py-4 bg-gray-800 hover:bg-white-900">Solve</button>
+        </form>
     );
 }
