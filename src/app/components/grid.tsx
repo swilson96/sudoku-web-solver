@@ -21,7 +21,7 @@ export default function Grid({ value, setValue, touched, setTouched }: GridProps
     }, [setTouched, touched]);
 
     return (
-        <div className="grid grid-cols-9">
+        <div className="grid grid-cols-9 p-1">
             {Array.from({ length: 9 }, (_, i) => (
                 <Fragment key ={i}>
                     {Array.from({ length: 9 }, (_, j) => (

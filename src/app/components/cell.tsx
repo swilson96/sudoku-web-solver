@@ -12,7 +12,7 @@ type CellProps = {
 
 export default function Cell({ rowIndex, colIndex, value, setValue, touched, setTouched }: CellProps) {
     const classes = useMemo(() => {
-        let c = "p-3 h-15 w-15";
+        let c = "p-0.5 sm:p-3 h-15 w-15";
         if (colIndex === 2 || colIndex === 5) {
             c += " border-r-2";
         }
@@ -32,7 +32,7 @@ export default function Cell({ rowIndex, colIndex, value, setValue, touched, set
         }
     }, [setValue, setTouched]);
 
-    const inputClasses = "h-12 w-12 p-3 " + (touched ? "bg-gray-600" : "bg-gray-800");
+    const inputClasses = "h-8 w-8 sm:h-12 sm:w-12 p-1 sm:p-3 " + (touched ? "bg-gray-600" : "bg-gray-800");
     
     return (
         <div className={classes}>
